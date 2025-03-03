@@ -13,5 +13,5 @@ class Drug(Base):
 
     categories = relationship("DrugCategory", back_populates="drug")
     prescriptions = relationship("PrescriptionDrug", back_populates="drug")
-    order_association = relationship("DrugOrder", back_populates="drug")
-    cart_association = relationship("DrugCart", back_populates="drug")
+    orders = relationship("DrugOrder", back_populates="drug")
+    carts = relationship("DrugCart", back_populates="drug")

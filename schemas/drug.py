@@ -2,7 +2,7 @@ from typing import Annotated, Optional, List
 from pydantic import BaseModel, Field
 
 from schemas.cart import DrugCart
-from schemas.category import DrugCategory
+from schemas.category import CategoryBase
 from schemas.order import DrugOrder
 
 # Base Schema
@@ -26,10 +26,11 @@ class DrugUpdate(BaseModel):
 # Schema for Returning Drug Data
 class DrugResponse(DrugBase):
     id: int
-    categories: List["DrugCategory"]
-    carts: List["DrugCart"]
-    orders: List["DrugOrder"]
 
     class Config:
         from_attributes = True
 
+class DrugDetailedResponse(DrugResponse):
+    categories: List["CategoryBase"]
+    carts: List["DrugCart"]
+    orders: List["DrugOrder"]

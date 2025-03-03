@@ -11,5 +11,5 @@ class DrugCart(Base):
     cart_id = Column(Integer, ForeignKey("carts.id", ondelete="CASCADE"), nullable=False)
     quantity = Column(Integer, nullable=False, default=1)
 
-    drug = relationship("Drug", back_populates="cart_association")
+    drug = relationship("Drug", back_populates="carts")
     cart = relationship("Cart", back_populates="drug_association")

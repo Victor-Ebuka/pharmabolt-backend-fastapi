@@ -10,5 +10,5 @@ class DrugOrder(Base):
     order_id = Column(Integer, ForeignKey("orders.id", ondelete="CASCADE"), nullable=False)
     quantity = Column(Integer, nullable=False, default=1)
 
-    drug = relationship("Drug", back_populates="order_association")
+    drug = relationship("Drug", back_populates="orders")
     order = relationship("Order", back_populates="drug_association")

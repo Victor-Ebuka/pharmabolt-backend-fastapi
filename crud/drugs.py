@@ -1,9 +1,13 @@
-from models.drug import Drug
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
+from models.drug import Drug
+from models.drug_cart import DrugCart
+from models.drug_category import DrugCategory
+from models.drug_order import DrugOrder
 from schemas.drug import DrugCreate, DrugUpdate
+from models.prescription_drug import PrescriptionDrug
 
-def create_drug(db: Session, drug: DrugCreate) -> Drug:
+def add_drug(db: Session, drug: DrugCreate) -> Drug:
     db_drug = db.query(Drug).filter(Drug.name == drug.name).first()
     if db_drug:
         raise HTTPException(status_code=400, detail="Drug already exists")
@@ -42,3 +46,19 @@ def delete_drug(drug_id: int, db: Session):
     db.delete(db_drug)
     db.commit()
     return
+
+def get_drugs_by_category_id(category_id: int, db: Session) -> list[Drug]:
+    drugs = db.query(Drug).join(DrugCategory, DrugCategory.drug_id == Drug.id).filter(DrugCategory.category_id == category_id).all()
+    return drugs
+
+def get_drugs_by_order_id(order_id: int, db: Session) -> list[Drug]:
+    drugs = db.query(Drug).join(DrugOrder, DrugOrder.drug_id == Drug.id).filter(DrugOrder.order_id == order_id).all()
+    return drugs
+
+def get_drugs_by_cart_id(cart_id: int, db: Session) -> list[Drug]:
+    drugs = db.query(Drug).join(DrugCart, DrugCart.drug_id == Drug.id).filter(DrugCart.cart_id == cart_id).all()
+    return drugs
+
+def get_drugs_by_prescription_id(prescription_id: int, db: Session) -> list[Drug]:
+    drugs = db.query(Drug).join(PrescriptionDrug, PrescriptionDrug.drug_id == Drug.id).filter(PrescriptionDrug.prescription_id == prescription_id).all()
+    return drugs
