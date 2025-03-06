@@ -1,4 +1,4 @@
-from typing import Annotated, Optional, List
+from typing import Annotated, Literal, Optional, List
 from pydantic import BaseModel, EmailStr, Field
 from schemas.cart import Cart
 from schemas.order import UserOrder
@@ -12,7 +12,7 @@ class UserBase(BaseModel):
     address: Annotated[str, Field(max_length=255)]
     city: Annotated[str, Field(max_length=255)]
     state: Annotated[str, Field(max_length=255)]
-    role: Optional[str] = "user"
+    role: Literal["user", "admin"] = "user"
 
 # Schema for Creating User
 class UserCreate(UserBase):

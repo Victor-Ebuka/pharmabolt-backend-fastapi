@@ -22,4 +22,4 @@ class Order(Base):
     order_no = Column(Integer, order_no_seq, server_default=order_no_seq.next_value(), unique=True, nullable=False)
 
     user = relationship("User", back_populates="orders")
-    drug_association = relationship("DrugOrder", back_populates="order")
+    drugs = relationship("DrugOrder", back_populates="order")

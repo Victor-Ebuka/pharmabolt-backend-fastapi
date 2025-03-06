@@ -26,7 +26,11 @@ dependencies = [
     "sniffio (==1.3.1)",
     "starlette (==0.45.3)",
     "typing-extensions (==4.12.2)",
-    "alembic (>=1.14.1,<2.0.0)"
+    "alembic (>=1.14.1,<2.0.0)",
+    "python-jose (>=3.4.0,<4.0.0)",
+    "passlib[bcrypt] (>=1.7.4,<2.0.0)",
+    "pyjwt (>=2.10.1,<3.0.0)",
+    "python-multipart (>=0.0.20,<0.0.21)"
 ]
 
 

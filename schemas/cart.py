@@ -13,10 +13,10 @@ class CartUpdate(BaseModel):
 
 class Cart(CartBase):
     id: int
-    drugs: List["DrugCart"]  # Updated to include drugs in the cart
+    drugs: Optional[List["DrugCart"]]  # Updated to include drugs in the cart
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class DrugCartBase(BaseModel):
     cart_id: int
@@ -27,4 +27,4 @@ class DrugCart(DrugCartBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

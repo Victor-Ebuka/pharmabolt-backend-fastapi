@@ -12,4 +12,4 @@ class DrugCart(Base):
     quantity = Column(Integer, nullable=False, default=1)
 
     drug = relationship("Drug", back_populates="carts")
-    cart = relationship("Cart", back_populates="drug_association")
+    cart = relationship("Cart", back_populates="drugs")

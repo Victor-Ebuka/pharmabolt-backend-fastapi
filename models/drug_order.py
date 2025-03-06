@@ -11,4 +11,4 @@ class DrugOrder(Base):
     quantity = Column(Integer, nullable=False, default=1)
 
     drug = relationship("Drug", back_populates="orders")
-    order = relationship("Order", back_populates="drug_association")
+    order = relationship("Order", back_populates="drugs")

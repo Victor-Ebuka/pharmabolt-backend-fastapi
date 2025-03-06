@@ -15,7 +15,7 @@ class Category(CategoryBase):
     drugs: List["DrugCategory"]  # Added relationship with drugs
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class DrugCategoryBase(BaseModel):
     drug_id: int
@@ -25,4 +25,4 @@ class DrugCategory(DrugCategoryBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

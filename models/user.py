@@ -14,7 +14,6 @@ class User(Base):
     city = Column(String(255), nullable=False)
     state = Column(String(255), nullable=False)
     role = Column(String(255), nullable=False, default="user")
-    refresh_token = Column(Text, unique=True)
 
     prescriptions = relationship("Prescription", back_populates="user")
     cart = relationship("Cart", back_populates="user", uselist=False)

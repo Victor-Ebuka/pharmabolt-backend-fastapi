@@ -11,4 +11,4 @@ class Cart(Base):
     total_price = Column(Integer, nullable=False)
 
     user = relationship("User", back_populates="cart")
-    drug_association = relationship("DrugCart", back_populates="cart")
+    drugs = relationship("DrugCart", back_populates="cart")

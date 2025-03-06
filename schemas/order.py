@@ -23,7 +23,7 @@ class Order(OrderBase):
     drugs: List["DrugOrder"]  # Added drugs to the order schema
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class DrugOrderBase(BaseModel):
     drug_id: int
@@ -34,7 +34,7 @@ class DrugOrder(DrugOrderBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class UserOrder(BaseModel):
     id: int
