@@ -5,11 +5,12 @@ from routes.users import router as users_router
 from routes.drugs import router as drugs_router
 from routes.auth import router as auth_router
 from routes.carts import router as carts_router
+from routes.orders import router as orders_router
 
 app = FastAPI(
     title="PharmaBolt API",
     description="API for a PharmaBolt",
-    version="1.0.0"
+    version="1.1.0"
 )
 
 Base.metadata.create_all(bind=engine)
@@ -25,3 +26,4 @@ app.include_router(auth_router)
 app.include_router(users_router)
 app.include_router(drugs_router)
 app.include_router(carts_router)
+app.include_router(orders_router)

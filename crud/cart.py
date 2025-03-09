@@ -5,8 +5,9 @@ from fastapi import HTTPException
 from models.cart import Cart
 from models.drug_cart import DrugCart
 
-def get_cart_by_user_id(user_id: int, db: Session) -> Cart:
-    cart = db.query(Cart).filter(Cart.user_id == user_id).join(DrugCart, DrugCart.cart_id == Cart.id).first()
+def retrieve_cart_by_user_id(user_id: int, db: Session) -> Cart:
+    # cart = db.query(Cart).filter(Cart.user_id == user_id).join(DrugCart, DrugCart.cart_id == Cart.id).first()
+    cart = db.query(Cart).filter(Cart.user_id == user_id).first()
     if not cart:
         raise HTTPException(status_code=404, detail="Cart not found")
     return cart 
@@ -27,7 +28,7 @@ def get_cart_by_id(cart_id: int, db: Session) -> Cart:
 
 def add_drug_to_cart(user_id: int, drug_id: int, quantity: int, db: Session) -> Cart:
     # Check if the user has an existing cart, if not create one
-    cart = get_cart_by_user_id(user_id, db)
+    cart = retrieve_cart_by_user_id(user_id, db)
     if not cart:
         cart = Cart(user_id=user_id, total_price=0)
         db.add(cart)
@@ -66,7 +67,7 @@ def add_drug_to_cart(user_id: int, drug_id: int, quantity: int, db: Session) -> 
     return cart
     
 def remove_drug_from_cart(user_id: int, drug_id: int, db: Session) -> Cart:
-    cart = get_cart_by_user_id(user_id, db)
+    cart = retrieve_cart_by_user_id(user_id, db)
     if not cart:
         raise HTTPException(status_code=404, detail="Cart not found")
 
@@ -88,7 +89,7 @@ def remove_drug_from_cart(user_id: int, drug_id: int, db: Session) -> Cart:
     return cart
 
 def empty_cart(user_id: int, db: Session) -> Cart:
-    cart = get_cart_by_user_id(user_id, db)
+    cart = retrieve_cart_by_user_id(user_id, db)
     if not cart:
         raise HTTPException(status_code=404, detail="Cart not found")
 

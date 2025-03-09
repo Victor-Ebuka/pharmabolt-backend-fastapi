@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, status
 from auth import get_current_user
-from crud.cart import add_drug_to_cart, empty_cart, get_cart_by_id, get_carts, remove_drug_from_cart
+from crud.cart import add_drug_to_cart, empty_cart, get_cart_by_id, get_carts, remove_drug_from_cart, retrieve_cart_by_user_id
 from database.session import get_db
 from sqlalchemy.orm import Session
 
@@ -23,7 +23,7 @@ def read_cart(cart_id: int, db: Session = Depends(get_db)):
 
 @router.post("/", response_model=Cart)
 def get_cart_by_user_id(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    return get_cart_by_user_id(current_user.id, db)
+    return retrieve_cart_by_user_id(current_user.id, db)
 
 @router.post("/drugs", response_model=Cart)
 def add_to_cart(drug_id: int, quantity: int, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):

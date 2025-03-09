@@ -3,15 +3,11 @@ from typing import Optional, Literal, List, Annotated
 from datetime import date
 
 class OrderBase(BaseModel):
-    status: Literal["PENDING", "SHIPPED", "DELIVERED", "CANCELLED"]
+    status: Literal["PENDING", "SHIPPED", "DELIVERED", "CANCELLED"] = "PENDING"
     order_date: date
-    delivery_date: Optional[date]
     payment_method: str
     delivery_method: str
-    user_id: int
     product_total: int
-    delivery_fee: int
-    total_price: int
     delivery_address: str
 
 class OrderCreate(OrderBase):
@@ -19,7 +15,11 @@ class OrderCreate(OrderBase):
 
 class Order(OrderBase):
     id: int
+    user_id: int
     order_no: int
+    total_price: int
+    delivery_fee: int
+    delivery_date: Optional[date]
     drugs: List["DrugOrder"]  # Added drugs to the order schema
 
     class Config:

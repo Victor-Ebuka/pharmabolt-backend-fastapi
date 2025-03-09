@@ -1,5 +1,5 @@
 from auth import get_current_user
-from crud.cart import get_cart_by_user_id
+from crud.cart import retrieve_cart_by_user_id
 from database.session import get_db
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
