@@ -273,3 +273,4 @@ $RECYCLE.BIN/
 # Random Files
 backup_drugs.json
 ply.sql
+pharmabolt_db_dump.sql
